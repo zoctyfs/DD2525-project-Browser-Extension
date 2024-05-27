@@ -1,0 +1,14 @@
+{
+    "name": "malicious-extension-server",
+    "version": "1.0.0",
+    "description": "Server to receive data from a malicious browser extension",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "body-parser": "^1.19.0",
+      "express": "^4.17.1"
+    }
+  }
+  
