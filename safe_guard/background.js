@@ -12,7 +12,7 @@ const permissionRisks = {
   "bookmarks": "Can access and modify your bookmarks.",
   "internal:privateBrowsingAllowed": "Allows the extension to run in private browsing mode, potentially compromising privacy.",
   "internal:svgContextPropertiesAllowed": "Allows access to SVG context properties, potentially enabling style tampering and obfuscation attacks.",
-  // Add more permissions and their risks as needed
+  
 };
 
 // Function to send detected suspicious activities to a server
