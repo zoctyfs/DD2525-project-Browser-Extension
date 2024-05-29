@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Extension and Content Watcher</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .extension {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    .permission {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Installed Extensions and Permissions</h1>
+  <div id="extensions"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      browser.storage.local.get('suspiciousExtensions').then((result) => {
+        const extensions = result.suspiciousExtensions || [];
+        const extensionsDiv = document.getElementById('extensions');
+
+        extensions.forEach(ext => {
+          const extDiv = document.createElement('div');
+          extDiv.className = 'extension';
+
+          const extTitle = document.createElement('h2');
+          extTitle.textContent = ext.name;
+          extDiv.appendChild(extTitle);
+
+          const extDesc = document.createElement('p');
+          extDesc.textContent = ext.description;
+          extDiv.appendChild(extDesc);
+
+          const permissionsList = document.createElement('ul');
+          ext.permissions.forEach(permission => {
+            const permItem = document.createElement('li');
+            permItem.className = 'permission';
+            permItem.textContent = `${permission.permission}: ${permission.risk}`;
+            permissionsList.appendChild(permItem);
+          });
+
+          extDiv.appendChild(permissionsList);
+          extensionsDiv.appendChild(extDiv);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
