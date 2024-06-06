@@ -34,7 +34,6 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && tab.active) {
     console.log('Tab updated and completed:', tabId);
     getAllCookies();
-    // injectContentScript(tabId);
   }
 });
 
@@ -43,17 +42,17 @@ browser.tabs.onActivated.addListener((activeInfo) => {
     if (tab.status === 'complete') {
       console.log('Tab activated:', activeInfo.tabId);
       getAllCookies();
-    //   injectContentScript(activeInfo.tabId);
     }
   });
 });
 
 // //////////////////////////////////////////////////////////
 
-// document.addEventListener('keydown', function(event) {
-//     browser.runtime.sendMessage({ type: 'keystrokes', data: event.key });
-//     // console.log('Keyboard:', event.key);
-//   });
+// Function to inject content script into a specific tab
+function injectContentScript(tabId) {
+  console.log(`Injecting content script into tab: ${tabId}`);
+  browser.tabs.executeScript(tabId, { file: 'content_script.js' });
+}
 
 browser.runtime.onMessage.addListener((message, sender) => {
   if (message.type === 'keystrokes') {
@@ -62,11 +61,6 @@ browser.runtime.onMessage.addListener((message, sender) => {
   }
 });
 
-// Function to inject content script into a specific tab
-function injectContentScript(tabId) {
-  console.log(`Injecting content script into tab: ${tabId}`);
-  browser.tabs.executeScript(tabId, { file: 'content_script.js' });
-}
 
 // Initial injection of content script into all active tabs
 browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {

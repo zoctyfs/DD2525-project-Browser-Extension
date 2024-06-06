@@ -6,19 +6,19 @@ function checkForInjectedContent() {
     console.warn('Unauthorized ad content detected!');
     alert('Warning: Unauthorized ad content detected!');
     // Report to the server
-    fetch('http://localhost:8080/report', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        type: 'injected_content',
-        content: adContainer.innerHTML
-      })
-    })
-    .then(response => response.text())
-    .then(result => console.log('Injected content reported:', result))
-    .catch(error => console.error('Error reporting injected content:', error));
+    // fetch('http://localhost:8080/report', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     type: 'injected_content',
+    //     content: adContainer.innerHTML
+    //   })
+    // })
+    // .then(response => response.text())
+    // .then(result => console.log('Injected content reported:', result))
+    // .catch(error => console.error('Error reporting injected content:', error));
     // Remove the ad container
     adContainer.remove();
   }
